@@ -4,7 +4,7 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 sudo timedatectl set-ntp true
 
-sudo echo "FallbackNTP=time.nist.gov" | sudo tee -a /etc/systemd/timesyncd.conf 
+sudo echo "FallbackNTP=time1.google.com" | sudo tee -a /etc/systemd/timesyncd.conf 
 sudo systemctl restart systemd-timesyncd
 
 sudo apt update
