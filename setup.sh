@@ -2,20 +2,29 @@
 
 sudo systemctl enable ssh
 sudo systemctl start ssh
-sudo timedatectl set-ntp true
-
-sudo echo "FallbackNTP=time1.google.com" | sudo tee -a /etc/systemd/timesyncd.conf 
-sudo systemctl restart systemd-timesyncd
-
-sudo apt update
 
 sudo systemctl set-default multi-user.target
 
+sudo timedatectl set-ntp true
+sleep 1
+sudo echo "FallbackNTP=time1.google.com" | sudo tee -a /etc/systemd/timesyncd.conf 
+sudo systemctl restart systemd-timesyncd
+sleep 1
+
+sudo reboot
+sudo apt update
+
+sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
+sudo rm /etc/lightdm/lightdm.conf
+
+sudo echo "[LightDM]" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo echo "autologin-user = kali" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo echo "autologin-user-timeout = 0" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo echo "[Seat:*]" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo echo "[XDMCPServer]" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo echo "[VNCServer]" | sudo tee -a /etc/lightdm/lightdm.conf
 
 sudo apt-get -y install hostapd dnsmasq
-sleep 5
 
 sudo echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
 sudo echo "source-directory /etc/network/interfaces.d" | sudo tee -a /etc/network/interfaces
@@ -67,16 +76,15 @@ sudo echo "bogus-priv" | sudo tee -a /etc/dnsmasq.conf
 sudo echo "dhcp-range=192.168.5.100,192.168.5.200,24h" | sudo tee -a /etc/dnsmasq.conf
 
 sudo systemctl unmask hostapd
+sleep 4
 sudo systemctl enable hostapd  
-sleep 2
+sleep 15
 sudo systemctl start hostapd
-sleep 5
+sleep 1
 sudo dnsmasq --test -C /etc/dnsmasq.conf 
 sleep 1
 sudo systemctl enable dnsmasq 
-sleep 2
-sudo systemctl restart dnsmasq
-sleep 5
+sleep 15
 
 sudo echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
 sudo echo "sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE" | sudo tee -a /etc/sysctl.conf
@@ -96,8 +104,8 @@ sudo echo "[Install]" | sudo tee -a /etc/systemd/system/iptables.service
 sudo echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/iptables.service
 
 sudo systemctl enable iptables
-sleep 2
-sudo systemctl start iptables
 sleep 5
+sudo systemctl start iptables
+sleep 1
 
 sudo reboot
