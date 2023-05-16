@@ -88,3 +88,5 @@ sudo echo "WantedBy=multi-user.target" | sudo tee -a /etc/systemd/system/iptable
 
 sudo systemctl enable iptables
 sudo systemctl start iptables
+
+sudo reboot
