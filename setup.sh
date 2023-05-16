@@ -1,5 +1,6 @@
 #!/bin/bash
 
+> /etc/motd
 sudo tee -a /etc/motd <<EOT
            ,   ,
          ,-`{-`/
