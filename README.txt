@@ -12,3 +12,9 @@ It will setup the raspberry pi to broadcast a network that will make the Pi be a
 The network name by default is "Skynet" and the password is "password" I have marked in the script where those can be changed, and I recommend doing so befoore you run it.
 Once you connect, it will be accessable on 192.168.5.1 and if you connect another wifi usb or ethernet it will pass through the internet connection to your connected device.
 If you have any improvements please let me know and I will do my best to add them.
+
+
+ ____________                       _____________                      ____________ 
+|Phone or PC |----------PI-WIFI-----|..       ..|---ATTACK ANNTENA-----| INTERNET |
+|___SSH______|          (Skynet)    |  ..PI ..  |                      |__________| 
+                                    |___________| 
