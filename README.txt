@@ -1,4 +1,4 @@
-This is a setup script I made to automate the setup of a mobile, ssh-accesssable, through pi-hosted wifi, kali on a raspberry Pi. 
+This is a setup script I made to automate the setup of a kali linux mobile, ssh-accesssable through pi self-hosted wifi, on a RaspberryPi. 
 Setup a Raspberry pi with 64x Kali then set the time with "sudo date -s 'YYYY-MM-DD HH:MM" then once you run the script it will configure everything and reboot.
 I know the commands work if you run them manually but I got tiredof doing that every time I set up a new one so this is my first attempted script.
 It will setup the raspberry pi to broadcast a network that will be accesssable through ssh. 
