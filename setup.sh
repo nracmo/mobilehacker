@@ -23,7 +23,6 @@ sudo echo "iface lo inet loopback" /etc/network/interfaces
 sudo echo "hostapd /etc/hostapd/hostapd.conf" | sudo tee -a /etc/network/interfaces
 sudo echo "auto eth0" | sudo tee -a /etc/network/interfaces
 sudo echo "iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces
-sudo echo "iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces
 sudo echo "auto wlan0" | sudo tee -a /etc/network/interfaces
 sudo echo "allow-hotplug wlan0" | sudo tee -a /etc/network/interfaces
 sudo echo "iface wlan0 inet static" | sudo tee -a /etc/network/interfaces
@@ -67,17 +66,23 @@ sudo echo "bogus-priv" | sudo tee -a /etc/dnsmasq.conf
 sudo echo "dhcp-range=192.168.5.100,192.168.5.200,24h" | sudo tee -a /etc/dnsmasq.conf
 
 sudo systemctl unmask hostapd
+sleep 5
 sudo systemctl enable hostapd               
 sudo systemctl start hostapd
 sudo dnsmasq --test -C /etc/dnsmasq.conf 
 sudo systemctl enable dnsmasq 
+sleep 5
 sudo systemctl restart dnsmasq
 
+sudo echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
 sudo echo "sudo iptables -t nat -A POSTROUTING -o wlan1 -j MASQUERADE" | sudo tee -a /etc/sysctl.conf
 sudo echo "sudo iptables -A FORWARD -i wlan1 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT" | sudo tee -a /etc/sysctl.conf
 sudo echo "sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT" | sudo tee -a /etc/sysctl.conf
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
+
+sudo echo "!/bin/sh" | sudo tee -a /usr/sbin/iptables.sh
+sudo echo "iptables-restore < /etc/iptables.ipv4.nat " | sudo tee -a /usr/sbin/iptables.sh
 
 sudo echo "[Unit]" | sudo tee -a /etc/systemd/system/iptables.service
 sudo echo "Description= iptables" | sudo tee -a /etc/systemd/system/iptables.service
