@@ -11,7 +11,6 @@ sudo echo "FallbackNTP=time1.google.com" | sudo tee -a /etc/systemd/timesyncd.co
 sudo systemctl restart systemd-timesyncd
 sleep 1
 
-sudo reboot
 sudo apt update
 
 sudo cp /etc/lightdm/lightdm.conf /etc/lightdm/lightdm.conf.bak
