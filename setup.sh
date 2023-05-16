@@ -27,6 +27,7 @@ sudo echo "[VNCServer]" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo apt-get -y install hostapd dnsmasq
 
 sudo echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
+
 sudo echo "source-directory /etc/network/interfaces.d" | sudo tee -a /etc/network/interfaces
 sudo echo "auto lo" | sudo tee -a /etc/network/interfaces
 sudo echo "iface lo inet loopback" /etc/network/interfaces
