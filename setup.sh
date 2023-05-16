@@ -30,7 +30,7 @@ sudo echo "denyinterfaces wlan0" | sudo tee -a /etc/dhcpcd.conf
 
 sudo echo "source-directory /etc/network/interfaces.d" | sudo tee -a /etc/network/interfaces
 sudo echo "auto lo" | sudo tee -a /etc/network/interfaces
-sudo echo "iface lo inet loopback" /etc/network/interfaces
+sudo echo "iface lo inet loopback" | sudo tee -a /etc/network/interfaces
 sudo echo "hostapd /etc/hostapd/hostapd.conf" | sudo tee -a /etc/network/interfaces
 sudo echo "auto eth0" | sudo tee -a /etc/network/interfaces
 sudo echo "iface eth0 inet dhcp" | sudo tee -a /etc/network/interfaces
@@ -94,7 +94,7 @@ sudo echo "sudo iptables -A FORWARD -i wlan0 -o wlan1 -j ACCEPT" | sudo tee -a /
 
 sudo sh -c "iptables-save > /etc/iptables.ipv4.nat"
 
-sudo echo "!/bin/sh" | sudo tee -a /usr/sbin/iptables.sh
+sudo echo '!/bin/sh' | sudo tee -a /usr/sbin/iptables.sh
 sudo echo "iptables-restore < /etc/iptables.ipv4.nat " | sudo tee -a /usr/sbin/iptables.sh
 
 sudo echo "[Unit]" | sudo tee -a /etc/systemd/system/iptables.service
