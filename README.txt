@@ -1,7 +1,7 @@
 This is a setup script I made to automate the setup of a kali linux mobile, ssh-accesssable through pi self-hosted wifi, on a RaspberryPi. 
 
               Setup a Raspberry pi with 64x Kali
-##IMPORTANT## Set the time with "sudo date -s 'YYYY-MM-DD HH:MM" 
+##IMPORTANT## Set the time with "sudo date -s "MMM DD YYYY HH:MM" 
               git clone https://github.com/nracmo/mobilehacker/
               cd mobilehacker
               sudo bash setup.sh
