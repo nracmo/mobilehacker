@@ -6,7 +6,7 @@ This is a setup script I made to automate the setup of a kali linux mobile, ssh-
               cd mobilehacker
               sudo bash setup.sh
 
-I know the commands work if you run them manually but I got tiredof doing that every time I set up a new one so this is my first attempted script.
+I know the commands work if you run them manually but I got tired of doing that every time I set up a new one so this is my first attempted script.
 
 It will setup the raspberry pi to broadcast a network that will make the Pi be accesssable through ssh. 
 The network name by default is "Skynet" and the password is "password" I have marked in the script where those can be changed, and I recommend doing so befoore you run it.
